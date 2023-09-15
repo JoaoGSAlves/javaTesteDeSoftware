@@ -15,7 +15,7 @@ import org.junit.Test;;
 public class GerenciadoraClientesTest2 {
 
 	private GerenciadoraClientes gerClientes;
-	
+
 	private int idCliente01 = 1;
 	private int idCliente02 = 2;
 
@@ -30,7 +30,7 @@ public class GerenciadoraClientesTest2 {
 
 		gerClientes = new GerenciadoraClientes(clientesDoBanco);
 	}
-	
+
 	@After
 	public void tearDown() {
 		gerClientes.limpa();
@@ -57,13 +57,19 @@ public class GerenciadoraClientesTest2 {
 
 	@Test
 	public void testRemoveClienteInexistente() {
-		
+
 		boolean resultadoRemocaoCliente = gerClientes.removeCliente(10);
-		
+
 		assertThat(resultadoRemocaoCliente, is(false));
 		assertFalse(resultadoRemocaoCliente);
 		assertThat(gerClientes.getClientesDoBanco().size(), is(2));
-		
-		
+
+	}
+
+	@Test
+	public void testPesquisaClienteInexistente() {
+		Cliente cliente = gerClientes.pesquisaCliente(13);
+
+		assertNull(cliente);
 	}
 }
